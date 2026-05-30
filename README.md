@@ -1,4 +1,4 @@
-# SmartHoldem Wallet - Forge Edition
+# SmartHoldem Wallet - Anvil Edition
 
 > **An industrial-grade crypto wallet for SmartHoldem (STH)** powered by Chrome MV3 Side Panel.
 > Vite + Vue 3 + Pinia + Tailwind. Core logic is strictly ported from the official [wallet-pro](https://github.com/smartholdem/wallet-pro).
@@ -37,7 +37,7 @@
 * High-contrast QR-code generator styled with signature cyan corner markers and JetBrains Mono address strings.
 * Tap-to-Copy interaction with an instant "Address Secured" toast alert.
 
-### 1.5. Swap Hub (Exchange · Forge)
+### 1.5. Swap Hub (Exchange · Anvil)
 
 * Dual-tabbed layout (**Buy STH / Sell STH**) matching the production `ExchangeModal.vue` logic from wallet-pro.
 * **Buy STH:**
@@ -607,7 +607,7 @@ End-to-end integration verification with a fully active, real-world native injec
 
 * The production `manifest.json` completely drops permission options for raw inline script executions while strictly limiting data request actions (`connect-src`) to authorized server nodes: `*.smartholdem.io`, `exchange.smartholdem.io`, `*.sth.cx`, `smartholder.xbts.io`.
 * The `bridge.js` worker isolation strategy executes operations exclusively within the isolated browser script context space, providing a single guarded gateway channel bridging dApp interfaces and background service workers.
-* Cryptographic code execution requests require human authorization via an explicit click interaction targeting the "Confirm with PIN" control overlay present inside the **Authorize Transaction** component layout — completely preventing dark/silent transaction signing vectors.
+* Cryptographic code execution requests require human authorization via an explicit click interaction targeting the "Confirm with PIN" control overlay present inside the **Authorize Transaction** component layout - completely preventing dark/silent transaction signing vectors.
 
 ### 3.5. Resilient Network Communications Transport
 
@@ -616,12 +616,12 @@ End-to-end integration verification with a fully active, real-world native injec
 
 ---
 
-## 4. Architectural Invariants: Why Forge Leads the SmartHoldem Ecosystem
+## 4. Architectural Invariants: Why Anvil Leads the SmartHoldem Ecosystem
 
 1. **Industrial-Grade Brutalist Design Aesthetics:** Rejects generic interface templates. Custom layout engineering built completely around specialized color variables: Gunmetal #121315, Rust Orange #E25822, Volt Cyan #06B6D4, and JetBrains Mono fonts optimizing tabular numeric data arrays and address string presentations. Real-time layout skinning updates instantly via clean root CSS variable injection schemes.
-2. **Side Panel Native Architecture Strategy:** Unlike typical browser popups that flush internal states and drop sessions when losing target focus or changing browser tabs, Forge lives inside a native persistent sidebar container. This structure preserves transactional context across intense web-poker tournaments and complex dApp sessions.
+2. **Side Panel Native Architecture Strategy:** Unlike typical browser popups that flush internal states and drop sessions when losing target focus or changing browser tabs, Anvil lives inside a native persistent sidebar container. This structure preserves transactional context across intense web-poker tournaments and complex dApp sessions.
 3. **Perfect Operational parity with wallet-pro:** Integrates identical cryptographic functions, matching transmission payload formats, and shared swap gate logic profiles. Move profiles across runtime applications with zero address mismatch risks.
-4. **Hierarchical Deterministic (HD) Multi-Accounts & Custom Tagging:** Derive infinite distinct address keys from a single master backup seed. Organize allocations using distinct local aliases like "Poker Bankroll", "Cold Storage", or "Daily Spend" — fully preserved inside your encrypted backup archives.
+4. **Hierarchical Deterministic (HD) Multi-Accounts & Custom Tagging:** Derive infinite distinct address keys from a single master backup seed. Organize allocations using distinct local aliases like "Poker Bankroll", "Cold Storage", or "Daily Spend" - fully preserved inside your encrypted backup archives.
 5. **Native Embedded Bridge Swap Functionality:** Avoid shifting between separate browser portals to handle exchange transactions. Execute automated Buy/Sell operations directly using unique per-account BEP20 deposit endpoints, automated slippage protections, and automated verification confirmation polling hooks.
 6. **Encrypted Security Backups via `.sth` Vault Files:** Extract your entire configuration footprint (Master seed strings, account index trees, application settings, node latency metrics, and verification PIN signatures) into a highly compressed, encrypted deployment module backed by Smart2FA standard security protocols.
 7. **Unified Web3 Engine Matrix for the SmartHoldem Space:** Exposes clean standardized interfaces: `window.smartholdem.signMessage`, `requestSwap`, and `signTransaction`. This design offers developer-ready integration paths for cardrooms, digital casinos, decentralized exchanges, and custom on-chain projects across the SmartHoldem grid.
@@ -631,7 +631,7 @@ End-to-end integration verification with a fully active, real-world native injec
 ## 5. Engineering Roadmap & UX/UI Enhancements
 
 1. **Automated Incoming Transaction Notifications:** Interfacing with the native Chrome Notifications API to trigger background desktop alerts upon capturing incoming ledger credits (Requires structural addition of the `notifications` permission manifest flag).
-2. **Local Address Book and Tagging Engine:** Introducing an address dictionary module featuring instant key searching and custom classification tags — optimized to manage frequent cardroom transfer endpoints.
+2. **Local Address Book and Tagging Engine:** Introducing an address dictionary module featuring instant key searching and custom classification tags - optimized to manage frequent cardroom transfer endpoints.
 3. **Privacy Masking UI Layer:** Implementing a touch/swipe gesture shortcut over the primary balance view module to instantly mask currency balances while accessing public environments.
 4. **Biometric Security Integration:** Accessing device-level authentication modules via WebAuthn API wrappers to provide immediate TouchID or Windows Hello biometric unlock options, keeping secure PIN signatures as a structural fallback layer.
 5. **Ecosystem Language Extension Packs:** Expanding the multi-language localization framework (`src/locales/index.ts`) beyond core EN, RU, ZH, and ES dictionaries to include comprehensive global translation modules via automated `vue-i18n` configurations.
