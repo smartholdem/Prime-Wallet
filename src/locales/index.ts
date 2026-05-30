@@ -25,7 +25,7 @@ const en: Dict = {
   "brand.tagline.2": "for hot",
   "brand.tagline.3": "crypto.",
   "brand.subtitle":
-    "A brutalist STH wallet for poker, payments, and pure on-chain sovereignty. Every signature is forged locally - your keys never leave the lockbox.",
+    "A brutalist STH wallet for poker, payments, and pure on-chain sovereignty. Every signature is forged locally — your keys never leave the lockbox.",
 
   // Welcome
   "welcome.create": "Forge a new wallet",
@@ -39,7 +39,7 @@ const en: Dict = {
   "lock.intro": "Your seed is encrypted at rest. Decrypt key never leaves this device.",
   "lock.security.h1": "Security at the metal level",
   "lock.security.b1": "AES-256-CBC encrypts your seed phrase locally",
-  "lock.security.b2": "PIN derived through SHA-384 - never stored as plain text",
+  "lock.security.b2": "PIN derived through SHA-384 — never stored as plain text",
   "lock.security.b3": "PBKDF2 with 25,000 iterations for vault backups",
   "lock.security.b4": "No telemetry, no server-side state, no analytics",
   "lock.forgot": "Forgot PIN? Restore from seed to recover.",
@@ -52,7 +52,7 @@ const en: Dict = {
   "dash.syncing": "syncing…",
   "dash.recent": "Recent Activity",
   "dash.viewAll": "View all →",
-  "dash.empty": "No transactions yet - receive some STH to begin.",
+  "dash.empty": "No transactions yet — receive some STH to begin.",
   "dash.fetching": "Fetching ledger…",
   "action.send": "Send",
   "action.receive": "Receive",
@@ -81,7 +81,7 @@ const en: Dict = {
   "top.apps": "Manage Connected Apps",
   "top.back": "Back",
 
-  // Connected sites (dApp whitelist) - dedicated /connected-sites view
+  // Connected sites (dApp whitelist) — dedicated /connected-sites view
   "apps.title": "Access · Connected Apps",
   "apps.subtitle":
     "Sites listed here are trusted to read your active SmartHoldem address without prompting. Revoke any you no longer use.",
@@ -134,7 +134,7 @@ const en: Dict = {
   "swap.bscBadge": "BSC Network · BEP20",
   "swap.iPaid": "I have paid",
   "swap.holdSell": "Hold to Sell",
-  "swap.unavail": "address unavailable - tap retry",
+  "swap.unavail": "address unavailable — tap retry",
   "swap.fetching": "fetching deposit address…",
   "swap.retry": "Retry",
   "swap.minWarnBuy":
@@ -162,8 +162,11 @@ const en: Dict = {
   "set.appearance": "Appearance · Design System",
   "set.themeRust": "Rust Classic",
   "set.themeCyan": "Cyan Steel",
-  "set.themeRustDesc": "SmartHoldem native - burned amber on gunmetal.",
-  "set.themeCyanDesc": "Legacy forge - anodized indigo + volt cyan.",
+  "set.themeLight": "Industrial Light",
+  "set.themeRustDesc": "SmartHoldem native — burned amber on gunmetal.",
+  "set.themeCyanDesc": "Legacy forge — anodized indigo + volt cyan.",
+  "set.themeLightDesc":
+    "Raw machined aluminum — tactical light forge with deep amber accents.",
   "set.language": "Internationalization · Language",
   "set.languageDesc": "Switch interface language instantly. More locales coming.",
   "set.security": "Security",
@@ -199,6 +202,28 @@ const en: Dict = {
   "auth.rejected": "Transaction rejected",
   "auth.unlock": "Unlock wallet first",
   "auth.pinPrompt": "Enter your PIN to sign.",
+  "auth.broadcastTitle": "Authorize · Sign & Broadcast",
+  "auth.broadcastCta": "Confirm, Sign & Broadcast",
+  "auth.broadcasting": "broadcasting to mainnet…",
+  "auth.broadcastTo": "Broadcast to",
+  "auth.broadcastOk": "Broadcast OK",
+  "auth.broadcastReject": "Node rejected transaction",
+
+  // Auto-Lock (Settings card)
+  "set.autoLock": "Auto-Lock",
+  "set.autoLockDesc": "Lock automatically after inactivity.",
+  "set.autoLockOn": "ON",
+  "set.autoLockOff": "OFF",
+  "set.autoLock.30s": "30 sec",
+  "set.autoLock.1m": "1 min",
+  "set.autoLock.2m": "2 min",
+  "set.autoLock.5m": "5 min",
+  "set.autoLock.10m": "10 min",
+  "set.autoLock.30m": "30 min",
+
+  // Swap one-shot status (BUY flow "I have paid" toast)
+  "swap.receivedWait":
+    "Once the transaction is received, you will get your STH coins.",
 
   // Common
   "common.back": "← Back",
@@ -211,7 +236,7 @@ const ru: Dict = {
   "brand.tagline.2": "для горячей",
   "brand.tagline.3": "крипты.",
   "brand.subtitle":
-    "Брутальный STH-кошелёк для покера, платежей и полного суверенитета on-chain. Каждая подпись куётся локально - ключи не покидают локбокс.",
+    "Брутальный STH-кошелёк для покера, платежей и полного суверенитета on-chain. Каждая подпись куётся локально — ключи не покидают локбокс.",
 
   "welcome.create": "Сковать новый кошелёк",
   "welcome.restore_seed": "Восстановить из seed",
@@ -224,7 +249,7 @@ const ru: Dict = {
     "Ваша seed-фраза зашифрована локально. Ключ расшифровки не покидает это устройство.",
   "lock.security.h1": "Защита на уровне металла",
   "lock.security.b1": "AES-256-CBC шифрует seed-фразу локально",
-  "lock.security.b2": "PIN через SHA-384 - никогда не хранится в открытом виде",
+  "lock.security.b2": "PIN через SHA-384 — никогда не хранится в открытом виде",
   "lock.security.b3": "PBKDF2 с 25 000 итераций для бэкапов хранилища",
   "lock.security.b4": "Нет телеметрии, нет серверного состояния, нет аналитики",
   "lock.forgot": "Забыли PIN? Восстановите кошелёк по seed-фразе.",
@@ -236,7 +261,7 @@ const ru: Dict = {
   "dash.syncing": "синхронизация…",
   "dash.recent": "Последние операции",
   "dash.viewAll": "Все →",
-  "dash.empty": "Транзакций пока нет - получите STH, чтобы начать.",
+  "dash.empty": "Транзакций пока нет — получите STH, чтобы начать.",
   "dash.fetching": "Загрузка реестра…",
   "action.send": "Отправить",
   "action.receive": "Получить",
@@ -311,12 +336,12 @@ const ru: Dict = {
   "swap.bscBadge": "Сеть BSC · BEP20",
   "swap.iPaid": "Я оплатил",
   "swap.holdSell": "Удерживайте, чтобы продать",
-  "swap.unavail": "адрес недоступен - нажмите для повтора",
+  "swap.unavail": "адрес недоступен — нажмите для повтора",
   "swap.fetching": "получаем адрес депозита…",
   "swap.retry": "Повторить",
   "swap.minWarnBuy":
     "⚠ Минимальный депозит: 5.00 USDT (BEP20). Меньшие суммы не обрабатываются шлюзом.",
-  "swap.minWarnSell": "⚠ Минимальная сумма обмена - 5 USDT.",
+  "swap.minWarnSell": "⚠ Минимальная сумма обмена — 5 USDT.",
   "swap.invalidBep20": "Адрес должен быть валидным BEP20 0x… (42 символа).",
   "swap.dispatched": "Ликвидность отправлена",
   "swap.unavailable": "Обмен недоступен",
@@ -337,10 +362,13 @@ const ru: Dict = {
   "set.appearance": "Внешний вид · Дизайн-система",
   "set.themeRust": "Rust Classic",
   "set.themeCyan": "Cyan Steel",
+  "set.themeLight": "Промышленный Светлый",
   "set.themeRustDesc":
-    "Нативный SmartHoldem - жжёная амбра на оружейной стали.",
+    "Нативный SmartHoldem — жжёная амбра на оружейной стали.",
   "set.themeCyanDesc":
-    "Legacy forge - анодированный индиго и вольтовый циан.",
+    "Legacy forge — анодированный индиго и вольтовый циан.",
+  "set.themeLightDesc":
+    "Необработанный алюминий — тактический светлый дизайн с глубокой амброй.",
   "set.language": "Язык интерфейса",
   "set.languageDesc": "Переключайте язык на лету. Новые локали впереди.",
   "set.security": "Безопасность",
@@ -406,7 +434,7 @@ const zh: Dict = {
   "brand.tagline.2": "为火热的",
   "brand.tagline.3": "加密资产。",
   "brand.subtitle":
-    "为扑克、支付以及完整链上主权而生的强硬派 STH 钱包。每一次签名都在本地铸造--您的密钥永远不会离开保险箱。",
+    "为扑克、支付以及完整链上主权而生的强硬派 STH 钱包。每一次签名都在本地铸造——您的密钥永远不会离开保险箱。",
 
   "welcome.create": "铸造新钱包",
   "welcome.restore_seed": "从助记词恢复",
@@ -418,7 +446,7 @@ const zh: Dict = {
   "lock.intro": "您的助记词本地加密保存。解密密钥永不离开本设备。",
   "lock.security.h1": "底层级别的安全",
   "lock.security.b1": "AES-256-CBC 在本地加密您的助记词",
-  "lock.security.b2": "PIN 通过 SHA-384 派生--从不以明文存储",
+  "lock.security.b2": "PIN 通过 SHA-384 派生——从不以明文存储",
   "lock.security.b3": "保险库备份使用 PBKDF2 25,000 次迭代",
   "lock.security.b4": "无遥测、无服务端状态、无分析追踪",
   "lock.forgot": "忘记 PIN?通过助记词恢复。",
@@ -430,7 +458,7 @@ const zh: Dict = {
   "dash.syncing": "同步中…",
   "dash.recent": "最近活动",
   "dash.viewAll": "查看全部 →",
-  "dash.empty": "暂无交易--先接收一些 STH。",
+  "dash.empty": "暂无交易——先接收一些 STH。",
   "dash.fetching": "正在获取账本…",
   "action.send": "发送",
   "action.receive": "接收",
@@ -504,7 +532,7 @@ const zh: Dict = {
   "swap.bscBadge": "BSC Network · BEP20",
   "swap.iPaid": "我已付款",
   "swap.holdSell": "按住以出售",
-  "swap.unavail": "地址不可用 - 点击重试",
+  "swap.unavail": "地址不可用 — 点击重试",
   "swap.fetching": "正在获取存款地址…",
   "swap.retry": "重试",
   "swap.minWarnBuy":
@@ -531,8 +559,10 @@ const zh: Dict = {
   "set.appearance": "外观 · 设计系统",
   "set.themeRust": "Rust Classic",
   "set.themeCyan": "Cyan Steel",
-  "set.themeRustDesc": "SmartHoldem 原生 - 烧焦琥珀色配枪金属。",
-  "set.themeCyanDesc": "传统熔炉 - 阳极化靛蓝 + 伏特青。",
+  "set.themeLight": "工业浅色",
+  "set.themeRustDesc": "SmartHoldem 原生 — 烧焦琥珀色配枪金属。",
+  "set.themeCyanDesc": "传统熔炉 — 阳极化靛蓝 + 伏特青。",
+  "set.themeLightDesc": "原始机加工铝 — 深琥珀色重点的战术浅色锻造。",
   "set.language": "国际化 · 语言",
   "set.languageDesc": "即时切换界面语言。",
   "set.security": "安全",
@@ -594,7 +624,7 @@ const es: Dict = {
   "brand.tagline.2": "para cripto",
   "brand.tagline.3": "ardiente.",
   "brand.subtitle":
-    "Una billetera STH brutalista para póker, pagos y pura soberanía on-chain. Cada firma se forja localmente - sus claves nunca abandonan la caja fuerte.",
+    "Una billetera STH brutalista para póker, pagos y pura soberanía on-chain. Cada firma se forja localmente — sus claves nunca abandonan la caja fuerte.",
 
   "welcome.create": "Forjar una nueva billetera",
   "welcome.restore_seed": "Restaurar desde semilla",
@@ -608,7 +638,7 @@ const es: Dict = {
   "lock.security.h1": "Seguridad a nivel del metal",
   "lock.security.b1": "AES-256-CBC cifra su frase semilla localmente",
   "lock.security.b2":
-    "PIN derivado mediante SHA-384 - nunca almacenado en texto plano",
+    "PIN derivado mediante SHA-384 — nunca almacenado en texto plano",
   "lock.security.b3":
     "PBKDF2 con 25.000 iteraciones para copias de seguridad",
   "lock.security.b4": "Sin telemetría, sin estado del servidor, sin analítica",
@@ -621,7 +651,7 @@ const es: Dict = {
   "dash.syncing": "sincronizando…",
   "dash.recent": "Actividad reciente",
   "dash.viewAll": "Ver todo →",
-  "dash.empty": "Aún no hay transacciones - reciba STH para comenzar.",
+  "dash.empty": "Aún no hay transacciones — reciba STH para comenzar.",
   "dash.fetching": "Cargando libro…",
   "action.send": "Enviar",
   "action.receive": "Recibir",
@@ -696,7 +726,7 @@ const es: Dict = {
   "swap.bscBadge": "BSC Network · BEP20",
   "swap.iPaid": "He pagado",
   "swap.holdSell": "Mantener para vender",
-  "swap.unavail": "dirección no disponible - toque reintentar",
+  "swap.unavail": "dirección no disponible — toque reintentar",
   "swap.fetching": "obteniendo dirección de depósito…",
   "swap.retry": "Reintentar",
   "swap.minWarnBuy":
@@ -725,8 +755,11 @@ const es: Dict = {
   "set.appearance": "Apariencia · Sistema de diseño",
   "set.themeRust": "Rust Classic",
   "set.themeCyan": "Cyan Steel",
-  "set.themeRustDesc": "SmartHoldem nativo - ámbar quemado sobre acero.",
-  "set.themeCyanDesc": "Forja heredada - índigo anodizado + cian volt.",
+  "set.themeLight": "Industrial Light",
+  "set.themeRustDesc": "SmartHoldem nativo — ámbar quemado sobre acero.",
+  "set.themeCyanDesc": "Forja heredada — índigo anodizado + cian volt.",
+  "set.themeLightDesc":
+    "Aluminio mecanizado en bruto — forja táctil clara con acentos ámbar profundo.",
   "set.language": "Internacionalización · Idioma",
   "set.languageDesc": "Cambie el idioma de la interfaz al instante.",
   "set.security": "Seguridad",

@@ -211,6 +211,24 @@ body {
   background-color: rgb(var(--accent-bright));
   border-color: rgb(var(--accent-bright));
 }
+/* Dashboard quick-action grid (Send / Swap) — in light theme we drop the
+ * solid amber fill and render them outlined like the Receive sibling so
+ * the action row reads as a coordinated tile set rather than a single
+ * heavy CTA + two ghosts. Scoped via `data-testid` so the rule never
+ * leaks to genuine primary CTAs (Welcome "Forge", AuthorizeTx confirm,
+ * Send "Hold to broadcast", etc.) which must stay solid. */
+[data-theme="light"] [data-testid="action-send"].forge-btn-primary,
+[data-theme="light"] [data-testid="action-swap"].forge-btn-primary {
+  background-color: transparent;
+  color: rgb(var(--accent));
+  border: 2px solid rgb(var(--accent));
+}
+[data-theme="light"] [data-testid="action-send"].forge-btn-primary:hover,
+[data-theme="light"] [data-testid="action-swap"].forge-btn-primary:hover {
+  background-color: rgb(var(--accent) / 0.1);
+  color: rgb(var(--accent-bright));
+  border-color: rgb(var(--accent-bright));
+}
 /* Secondary CTAs (Disconnect / Max / Reject) → outlined deep amber */
 [data-theme="light"] .forge-btn-rust {
   background: transparent;
