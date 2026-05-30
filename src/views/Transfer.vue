@@ -1,0 +1,195 @@
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+import { useWalletStore, STH_FEE } from "@/stores/wallet";
+import { pushToast, formatSth } from "@/lib/utils";
+import HoldButton from "@/components/HoldButton.vue";
+import BottomDock from "@/components/BottomDock.vue";
+
+const router = useRouter();
+const auth = useAuthStore();
+const wallet = useWalletStore();
+
+const recipient = ref("");
+const amount = ref("");
+const memo = ref("");
+const sending = ref(false);
+const lastTxId = ref<string | null>(null);
+
+const amountNum = computed(() => parseFloat(amount.value || "0") || 0);
+const totalDebit = computed(() => amountNum.value + STH_FEE);
+const overdraft = computed(() => totalDebit.value > wallet.activeBalance);
+
+const recipientValid = computed(() => {
+  if (!recipient.value) return null;
+  return wallet.validateAddress(recipient.value.trim());
+});
+
+const canSubmit = computed(
+  () =>
+    !sending.value &&
+    amountNum.value > 0 &&
+    recipientValid.value === true &&
+    !overdraft.value
+);
+
+async function submit() {
+  if (!canSubmit.value) {
+    if (recipientValid.value === false) pushToast("Invalid STH address", "error");
+    else if (overdraft.value) pushToast("Insufficient balance", "error");
+    else if (amountNum.value <= 0) pushToast("Enter amount", "error");
+    return;
+  }
+  sending.value = true;
+  try {
+    const r = await wallet.sendTransfer({
+      recipient: recipient.value.trim(),
+      amount: amountNum.value,
+      memo: memo.value.trim() || undefined,
+    });
+    lastTxId.value = r.tx?.id ?? null;
+    pushToast("Transaction broadcast", "success");
+    // refresh
+    await wallet.fetchBalance(auth.address);
+    setTimeout(() => router.replace("/dashboard"), 900);
+  } catch (e: any) {
+    pushToast(e?.message || "Broadcast failed", "error");
+  } finally {
+    sending.value = false;
+  }
+}
+
+function setMax() {
+  const v = Math.max(0, wallet.activeBalance - STH_FEE);
+  amount.value = v.toFixed(4);
+}
+</script>
+
+<template>
+  <div class="flex-1 flex flex-col min-h-0" data-testid="transfer-view">
+    <!-- header -->
+    <header
+      class="flex items-center justify-between px-4 py-3 border-b border-gunmetal-400 bg-gunmetal-800"
+    >
+      <button
+        @click="router.back()"
+        class="text-[11px] uppercase tracking-[0.18em] text-gunmetal-300 hover:text-bone"
+        data-testid="back-btn"
+      >
+        ← Back
+      </button>
+      <span class="text-[10px] uppercase tracking-[0.3em] text-bone font-semibold">
+        Cipher · Transfer
+      </span>
+      <span class="text-[10px] mono text-gunmetal-300">{{ formatSth(wallet.activeBalance, 2) }} STH</span>
+    </header>
+
+    <div class="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
+      <!-- Recipient -->
+      <div>
+        <label class="forge-label">Recipient STH Address</label>
+        <input
+          v-model="recipient"
+          spellcheck="false"
+          autocomplete="off"
+          class="forge-input"
+          :class="{
+            'border-rust focus:border-rust focus:shadow-glowRust':
+              recipientValid === false,
+          }"
+          placeholder="S…"
+          data-testid="recipient-input"
+        />
+        <p
+          v-if="recipientValid === false"
+          class="text-[11px] text-rust mt-1.5"
+          data-testid="recipient-error"
+        >
+          Address checksum invalid.
+        </p>
+        <p
+          v-else-if="recipientValid === true"
+          class="text-[11px] text-cyan-voltGlow mt-1.5"
+        >
+          ✓ Valid SmartHoldem address.
+        </p>
+      </div>
+
+      <!-- Amount -->
+      <div>
+        <div class="flex items-center justify-between mb-1.5">
+          <label class="forge-label !mb-0">Amount (STH)</label>
+          <button
+            @click="setMax"
+            class="text-[10px] uppercase tracking-[0.18em] text-cyan-voltGlow hover:text-cyan-volt"
+            data-testid="max-btn"
+          >
+            MAX
+          </button>
+        </div>
+        <input
+          v-model="amount"
+          type="number"
+          inputmode="decimal"
+          step="0.0001"
+          min="0"
+          class="forge-input"
+          placeholder="0.0000"
+          data-testid="amount-input"
+        />
+      </div>
+
+      <!-- Memo -->
+      <div>
+        <label class="forge-label">Vendor Field / MEMO</label>
+        <input
+          v-model="memo"
+          maxlength="64"
+          class="forge-input"
+          placeholder="Required for poker room deposits…"
+          data-testid="memo-input"
+        />
+        <p class="text-[10px] text-gunmetal-300 mt-1">
+          Used for routing to poker rooms, exchanges &amp; services. {{ memo.length }}/64
+        </p>
+      </div>
+
+      <!-- Fee box -->
+      <div
+        class="forge-card p-3 flex items-center justify-between text-xs"
+        data-testid="fee-box"
+      >
+        <span class="text-gunmetal-300 uppercase tracking-[0.18em] text-[10px] font-semibold">
+          Network Fee
+        </span>
+        <span class="mono text-rust font-semibold">{{ STH_FEE.toFixed(2) }} STH</span>
+      </div>
+
+      <!-- Total -->
+      <div class="flex items-center justify-between text-xs">
+        <span class="text-gunmetal-300 uppercase tracking-[0.18em] text-[10px] font-semibold">
+          Total debit
+        </span>
+        <span
+          class="mono font-semibold"
+          :class="overdraft ? 'text-rust' : 'text-bone'"
+        >
+          {{ formatSth(totalDebit, 4) }} STH
+        </span>
+      </div>
+
+      <div class="flex-1" />
+
+      <HoldButton
+        label="Hold to Sign &amp; Broadcast"
+        variant="indigo"
+        :disabled="!canSubmit"
+        testid="send-hold-btn"
+        @fired="submit"
+      />
+    </div>
+
+    <BottomDock />
+  </div>
+</template>

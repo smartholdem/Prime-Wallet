@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="rust"] {
+  color-scheme: dark;
+  --grain-opacity: 0.04;
+  /* === Theme A: "Oxid: Rust & Core" — the new default classic === */
+  --accent: 226 88 34;          /* #E25822 rust orange */
+  --accent-bright: 255 122 61;  /* #FF7A3D bright rust */
+  --highlight: 255 169 77;      /* #FFA94D burned amber */
+  --highlight-bright: 255 196 130; /* lighter amber */
+  --fiat: 226 232 240;          /* #E2E8F0 slate-200 high-contrast */
+  --fiat-dim: 148 163 184;      /* slate-400, dimmer secondary */
+}
+
+[data-theme="cyan"] {
+  color-scheme: dark;
+  /* === Theme B: "Forge: Cyan Steel" — legacy alt === */
+  --accent: 79 70 229;           /* #4F46E5 anodized indigo */
+  --accent-bright: 99 102 241;   /* #6366F1 brighter indigo */
+  --highlight: 6 182 212;        /* #06B6D4 volt cyan */
+  --highlight-bright: 34 211 238; /* #22D3EE cyan glow */
+  --fiat: 226 232 240;           /* #E2E8F0 — still bright (was muted before, FIX) */
+  --fiat-dim: 148 163 184;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #E6E7EA;
+  background: #0B0C0E;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
+
+/* === Preview shell (browser preview at port 3000) === */
+.preview-shell {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(79, 70, 229, 0.06), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(6, 182, 212, 0.05), transparent 40%),
+    #0B0C0E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.preview-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+.preview-shell #app {
+  width: 100%;
+  max-width: 400px;
+  height: min(720px, 100vh - 3rem);
+  border: 1px solid #2D3139;
+  border-radius: 18px;
+  background: #121315;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+.preview-shell #app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4F46E5, #06B6D4, transparent);
+  z-index: 30;
+  opacity: 0.6;
+}
+
+/* === Extension shell (Chrome side panel) === */
+.extension-shell {
+  background: #121315;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0C0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D3139;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3F49;
+}
+
+/* Selection */
+::selection {
+  background: rgba(79, 70, 229, 0.4);
+  color: #fff;
+}
+
+/* === Reusable component classes === */
+@layer components {
+  .forge-card {
+    @apply bg-gunmetal-600 border border-gunmetal-400 rounded-md shadow-forge relative;
+  }
+  .forge-card::before {
+    content: "";
+    @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none;
+  }
+  .forge-input {
+    @apply w-full bg-gunmetal-700 border border-gunmetal-400 rounded-md px-3 py-2.5 text-sm
+           text-bone placeholder:text-gunmetal-300 font-mono
+           focus:outline-none focus:border-indigo-forge focus:shadow-glowIndigo
+           transition-[border-color,box-shadow] duration-200;
+  }
+  .forge-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-gunmetal-300 mb-1.5 block;
+  }
+  .forge-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5
+           text-sm font-semibold tracking-wide
+           transition-all duration-150 active:scale-[0.98]
+           border border-gunmetal-400 bg-gunmetal-600 text-bone
+           hover:border-gunmetal-300 hover:bg-gunmetal-500;
+  }
+  .forge-btn-primary {
+    @apply forge-btn border-indigo-forge/60 bg-indigo-forge/15 text-indigo-forgeBright
+           hover:bg-indigo-forge/25 hover:shadow-glowIndigo;
+  }
+  .forge-btn-cyan {
+    @apply forge-btn border-cyan-volt/60 bg-cyan-volt/10 text-cyan-voltGlow
+           hover:bg-cyan-volt/20 hover:shadow-glowCyan;
+  }
+  .forge-btn-rust {
+    @apply forge-btn border-rust/60 bg-rust/10 text-rust
+           hover:bg-rust/20 hover:shadow-glowRust;
+  }
+  .mono {
+    @apply font-mono tracking-tight;
+  }
+  .metal-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gunmetal-400 to-transparent;
+  }
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  pointer-events: auto;
+  background: #1A1C20;
+  border: 1px solid #2D3139;
+  border-left: 3px solid #06B6D4;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #E6E7EA;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: toast-in 220ms ease-out;
+}
+
+.toast.toast-error {
+  border-left-color: #E25822;
+}
+.toast.toast-success {
+  border-left-color: #4F46E5;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
