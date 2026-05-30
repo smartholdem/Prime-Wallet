@@ -450,7 +450,7 @@ chrome.storage.local.get("sthActiveAddress", console.log);
 
 ```js
 // Открыть AuthorizeConnect модал
-window.__sthDevConnect({ origin: "https://poker.smartholdem.io" });
+window.__sthDevConnect({ origin: "https://playpoker.pro" });
 
 // Открыть AuthorizeTx модал в режиме SIGN ONLY
 window.__sthDevSignTx({
@@ -472,7 +472,7 @@ window.__sthDevSendTx({
 window.__sthDevDeepLink({
   direction: "USDT_TO_STH",
   amount: 42,
-  origin: "https://poker.smartholdem.io"
+  origin: "https://playpoker.pro"
 });
 ```
 
