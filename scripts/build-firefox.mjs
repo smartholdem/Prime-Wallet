@@ -166,7 +166,7 @@ manifest.permissions = (manifest.permissions || []).filter(
 //     in-app `sidebar=true/false` toggle (impossible at runtime —
 //     manifest surfaces are decided at install time).
 manifest.action = {
-  default_title: "SmartHoldem Wallet",
+  default_title: "Prime Wallet",
   default_popup: "popup.html",
   default_icon: {
     16: "icons/icon-16.png",
@@ -175,7 +175,7 @@ manifest.action = {
   },
 };
 manifest.sidebar_action = {
-  default_title: "SmartHoldem Wallet",
+  default_title: "Prime Wallet",
   default_panel: "popup.html",
   default_icon: {
     16: "icons/icon-16.png",
@@ -190,7 +190,7 @@ manifest.sidebar_action = {
 //     listing key, so it must remain stable across releases.
 manifest.browser_specific_settings = {
   gecko: {
-    id: "wallet-forge@smartholdem.io",
+    id: "prime-wallet@smartholdem.io",
     strict_min_version: "109.0",
   },
 };

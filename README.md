@@ -655,6 +655,21 @@ End-to-end integration verification with a fully active, real-world native injec
 
 ---
 
+## 📄 Licenses & Third-Party Notices
+
 **Licence**: MIT - feel free to fork.
 
 **Authors**: TechnoL0g & SmartHoldem Foundation.
+
+PRIME Wallet is open-source software. This project includes and bundles the following open-source fonts embedded locally for offline execution, performance, and user privacy:
+
+* **Inter Font Family**
+    * **Author:** Rasmus Andersson Suite
+    * **License:** [SIL Open Font License, Version 1.1](https://openfontlicense.org)
+    * **Usage:** Embedded locally in `src/assets/fonts/` for primary interface typography.
+
+* **JetBrains Mono**
+    * **Author:** JetBrains s.r.o.
+    * **License:** [SIL Open Font License, Version 1.1](https://openfontlicense.org)
+    * **Usage:** Embedded locally in `src/assets/fonts/` for cryptographic data, addresses, and monospace console elements.
+    
