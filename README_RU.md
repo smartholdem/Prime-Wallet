@@ -1,4 +1,4 @@
-# SmartHoldem Wallet - Optimus Edition
+# SmartHoldem Wallet - Prime Edition
 
 > **Промышленный криптокошелёк для SmartHoldem (STH)** на базе Chrome MV3 Side Panel.  
 > Vite + Vue 3 + Pinia + Tailwind. Логика портирована из официального [wallet-pro](https://github.com/smartholdem/wallet-pro).
@@ -31,7 +31,7 @@
 - QR-код адреса (cyan corner markers, JetBrains Mono).
 - Tap-to-Copy с уведомлением «Address Secured».
 
-### 1.5. Swap Hub (Exchange · Optimus)
+### 1.5. Swap Hub (Exchange · Prime)
 - Две вкладки **Buy STH / Sell STH** под точную копию `ExchangeModal.vue` из wallet-pro.
 - **Buy STH**:
   - Пользователь указывает желаемое количество STH.
@@ -564,7 +564,7 @@ yarn build:extension
 ## 4. Почему этот кошелёк - лучший в экосистеме SmartHoldem
 
 1. **Индустриальный дизайн**. Никакого «AI-slop» - Gunmetal #121315, Rust Orange #E25822, Volt Cyan #06B6D4, JetBrains Mono для адресов и балансов. Две темы переключаются мгновенно через CSS-переменные.
-2. **Side Panel-first**. В отличие от обычных popup-кошельков, Optimus живёт в боковой панели и не сбрасывает state при переключении вкладок - критично для покер-комнат и dApp-сессий.
+2. **Side Panel-first**. В отличие от обычных popup-кошельков, Prime живёт в боковой панели и не сбрасывает state при переключении вкладок - критично для покер-комнат и dApp-сессий.
 3. **Полная совместимость с wallet-pro**. Та же криптография, тот же formats, та же логика swap-гейтов - мигрируете с любого устройства без потери адресов.
 4. **HD-мультиаккаунты + кастомные метки**. Один seed → бесконечно адресов; назовите их «Poker Bankroll», «Cold Storage», «Daily Spend» - метки сохраняются в зашифрованном бэкапе.
 5. **Нативный SWAP внутри кошелька**. Не нужно открывать сторонний сайт - Buy/Sell с per-account BEP20-депозитом, slippage-расчётами, polling-ом подтверждения.
@@ -584,7 +584,6 @@ yarn build:extension
 7. **Onboarding-tour** на 4 шага: приветствие → seed → PIN → первый Receive со скриншотом «отправь себе тест-STH» CTA.
 8. **Estimated arrival** для bridge-свопов (вычислить median `trade.xbts.io` liquidity pools).
 9. **Dashboard charts** - sparkline STH/USDT за 24h в верхней карточке.
-10. **PWA-режим** для пользователей без Chrome (Safari) - переиспользовать ту же кодовую базу.
 
 ---
 
@@ -595,7 +594,7 @@ yarn build:extension
 - **v1.2.0** - Swap Hub + inline rename + unified BottomDock.
 - **v1.3.0** - dApp deep-link (`requestSwap`) + `.sth`-vault export/import + per-account tx cache + polling.
 - **v1.4.0** - Buy/Sell BEP20 alignment с wallet-pro + `signTransaction` provider + AuthorizeTx overlay.
-
+* **v1.4.7** – **PWA-режим** для пользователей без Chrome (Safari iOS) - переиспользовать ту же кодовую базу.
 ---
 
 **Licence**: MIT - feel free to fork.  

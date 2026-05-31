@@ -1,4 +1,4 @@
-# SmartHoldem Wallet - Optimus Edition
+# SmartHoldem Wallet - Prime Edition
 
 > **An industrial-grade crypto wallet for SmartHoldem (STH)** powered by Chrome MV3 Side Panel.
 > Vite + Vue 3 + Pinia + Tailwind. Core logic is strictly ported from the official [wallet-pro](https://github.com/smartholdem/wallet-pro).
@@ -37,7 +37,7 @@
 * High-contrast QR-code generator styled with signature cyan corner markers and JetBrains Mono address strings.
 * Tap-to-Copy interaction with an instant "Address Secured" toast alert.
 
-### 1.5. Swap Hub (Exchange · Optimus)
+### 1.5. Swap Hub (Exchange · Prime)
 
 * Dual-tabbed layout (**Buy STH / Sell STH**) matching the production `ExchangeModal.vue` logic from wallet-pro.
 * **Buy STH:**
@@ -616,10 +616,10 @@ End-to-end integration verification with a fully active, real-world native injec
 
 ---
 
-## 4. Architectural Invariants: Why Optimus Leads the SmartHoldem Ecosystem
+## 4. Architectural Invariants: Why Prime Leads the SmartHoldem Ecosystem
 
 1. **Industrial-Grade Brutalist Design Aesthetics:** Rejects generic interface templates. Custom layout engineering built completely around specialized color variables: Gunmetal #121315, Rust Orange #E25822, Volt Cyan #06B6D4, and JetBrains Mono fonts optimizing tabular numeric data arrays and address string presentations. Real-time layout skinning updates instantly via clean root CSS variable injection schemes.
-2. **Side Panel Native Architecture Strategy:** Unlike typical browser popups that flush internal states and drop sessions when losing target focus or changing browser tabs, Optimus lives inside a native persistent sidebar container. This structure preserves transactional context across intense web-poker tournaments and complex dApp sessions.
+2. **Side Panel Native Architecture Strategy:** Unlike typical browser popups that flush internal states and drop sessions when losing target focus or changing browser tabs, Prime lives inside a native persistent sidebar container. This structure preserves transactional context across intense web-poker tournaments and complex dApp sessions.
 3. **Perfect Operational parity with wallet-pro:** Integrates identical cryptographic functions, matching transmission payload formats, and shared swap gate logic profiles. Move profiles across runtime applications with zero address mismatch risks.
 4. **Hierarchical Deterministic (HD) Multi-Accounts & Custom Tagging:** Derive infinite distinct address keys from a single master backup seed. Organize allocations using distinct local aliases like "Poker Bankroll", "Cold Storage", or "Daily Spend" - fully preserved inside your encrypted backup archives.
 5. **Native Embedded Bridge Swap Functionality:** Avoid shifting between separate browser portals to handle exchange transactions. Execute automated Buy/Sell operations directly using unique per-account BEP20 deposit endpoints, automated slippage protections, and automated verification confirmation polling hooks.
@@ -639,7 +639,7 @@ End-to-end integration verification with a fully active, real-world native injec
 7. **Four-Step Guided Onboarding Flow:** Constructing a smooth introduction sequence for first-time deployments: Welcome Dashboard Overview → Mnemonic Generation Audit → Security PIN Signature Lock → Primary Receive Verification displaying an actionable "Fund Your Wallet with a Test-STH" invitation.
 8. **Bridge Exchange Arrival Metric Calculators:** Integrating diagnostic metric routines to track median liquidity pool settlement times on `trade.xbts.io`, calculating live estimated arrival metrics for cross-chain swaps.
 9. **Dashboard Analytic Data Visualization Sparklines:** Injecting minimal 24-hour historical market trend line charts for STH/USDT inside the main top balance presentation panel.
-10. **Progressive Web Application (PWA) Deployment Package:** Compiling the underlying Vue application architecture into an optimized, platform-agnostic PWA wrapper to provide compatibility layers for systems missing Chrome engine capabilities (e.g., Safari on iOS).
+ 
 
 ---
 
@@ -650,7 +650,8 @@ End-to-end integration verification with a fully active, real-world native injec
 * **v1.2.0** – Native Swap Hub launch, inline account alias renaming features, and unified workspace layout docking configurations via BottomDock.
 * **v1.3.0** – dApp external deep-linking pipeline launch (`requestSwap`), encrypted `.sth`-vault export/import capabilities, optimized per-address historical caching, and automated status polling loops.
 * **v1.4.0** – Full alignment of Buy/Sell BEP20 logic routes with wallet-pro, deployment of the programmatic `signTransaction` web3 provider layer, and the rollout of the fully managed AuthorizeTx overlay layout.
-* **v1.4.6** – Standalone **smartoshi** subunit rebranding injection across all code layers, full integration of the Chinese (`zh`) and Spanish (`es`) translation files, launch of the **Industrial Light** CSS design system layout, and cross-platform Node.js `archiver` pipeline implementation for automated Firefox MV3 Popup fallback `.zip` compiling.
+* **v1.4.6** – Standalone **smartoshi** subunit injection across all code layers, full integration of the Chinese (`zh`) and Spanish (`es`) translation files, launch of the **Industrial Light** CSS design system layout, and cross-platform Node.js `archiver` pipeline implementation for automated Firefox MV3 Popup fallback `.zip` compiling.
+* **v1.4.7** – **Progressive Web Application (PWA) Deployment Package:** Compiling the underlying Vue application architecture into an optimized, platform-agnostic PWA wrapper to provide compatibility layers for systems missing Chrome engine capabilities (e.g., Safari on iOS).
 
 ---
 

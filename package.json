@@ -1,7 +1,7 @@
 {
-  "name": "optimus-wallet",
+  "name": "prime-wallet",
   "version": "1.4.6",
-  "description": "SmartHoldem (STH) Browser Extension Wallet - Optimus Edition",
+  "description": "SmartHoldem (STH) Browser Extension Wallet - Prime Edition",
   "type": "module",
   "scripts": {
     "start": "vite --host 0.0.0.0 --port 3000",
