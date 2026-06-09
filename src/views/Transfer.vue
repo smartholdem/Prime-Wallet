@@ -147,11 +147,11 @@ function setMax() {
           v-model="memo"
           maxlength="64"
           class="forge-input"
-          placeholder="Required for poker room deposits…"
+          placeholder="Optional required for deposits…"
           data-testid="memo-input"
         />
         <p class="text-[10px] text-gunmetal-300 mt-1">
-          Used for routing to poker rooms, exchanges &amp; services. {{ memo.length }}/64
+          Used for routing to dapps, exchanges &amp; services. {{ memo.length }}/64
         </p>
       </div>
 
@@ -160,7 +160,7 @@ function setMax() {
         class="forge-card p-3 flex items-center justify-between text-xs"
         data-testid="fee-box"
       >
-        <span class="text-gunmetal-300 uppercase tracking-[0.18em] text-[10px] font-semibold">
+        <span class="text-rust uppercase tracking-[0.18em] text-[10px] font-semibold">
           Network Fee
         </span>
         <span class="mono text-rust font-semibold">{{ STH_FEE.toFixed(2) }} STH</span>
@@ -168,7 +168,7 @@ function setMax() {
 
       <!-- Total -->
       <div class="flex items-center justify-between text-xs">
-        <span class="text-gunmetal-300 uppercase tracking-[0.18em] text-[10px] font-semibold">
+        <span class="uppercase tracking-[0.18em] text-[10px] font-semibold">
           Total debit
         </span>
         <span
@@ -182,7 +182,7 @@ function setMax() {
       <div class="flex-1" />
 
       <HoldButton
-        label="Hold to Sign &amp; Broadcast"
+        label="Hold to Transfer"
         variant="indigo"
         :disabled="!canSubmit"
         testid="send-hold-btn"

@@ -310,7 +310,7 @@ body {
            transition-[border-color,box-shadow] duration-200;
   }
   .forge-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-gunmetal-300 mb-1.5 block;
+    @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-orange-300 mb-1.5 block;
   }
   .forge-btn {
     @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5

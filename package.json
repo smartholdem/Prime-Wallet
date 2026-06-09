@@ -4,7 +4,7 @@
   "description": "SmartHoldem (STH) Browser Extension Wallet - Prime Edition",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 3000",
+    "dev": "vite --host 0.0.0.0 --port 3509",
     "build": "vue-tsc --noEmit && vite build",
     "build:pwa": "vue-tsc --noEmit && vite build --mode pwa",
     "preview:pwa": "vite preview --port 4173",
@@ -12,7 +12,7 @@
     "build:firefox": "vue-tsc --noEmit && node scripts/build-firefox.mjs",
     "check:csp": "node scripts/check-csp.mjs",
     "pack:crx": "node scripts/pack-crx.mjs",
-    "preview": "vite preview --host 0.0.0.0 --port 3000"
+    "preview": "vite preview --host 0.0.0.0 --port 3509"
   },
   "dependencies": {
     "@scure/bip32": "^2.2.0",

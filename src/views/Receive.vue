@@ -22,13 +22,13 @@ const auth = useAuthStore();
         ← Back
       </button>
       <span class="text-[10px] uppercase tracking-[0.3em] text-bone font-semibold">
-        Mint · Receive
+        STH · Receive
       </span>
       <span class="w-12" />
     </header>
 
     <div class="flex-1 overflow-y-auto px-4 py-4 flex flex-col items-center">
-      <p class="text-xs text-gunmetal-300 leading-relaxed text-center max-w-[280px] mb-4">
+      <p class="text-xs text-cyan-voltGlow leading-relaxed text-center max-w-[280px] mb-4">
         Scan or copy your SmartHoldem address. Funds arrive once the network confirms.
       </p>
 
@@ -54,6 +54,7 @@ const auth = useAuthStore();
         </button>
       </div>
 
+      <!--
       <div class="mt-4 w-full forge-card p-3 text-[11px] text-gunmetal-300 leading-relaxed">
         <span class="text-cyan-voltGlow uppercase tracking-[0.18em] text-[10px] font-semibold">
           MEMO
@@ -62,6 +63,7 @@ const auth = useAuthStore();
           When receiving from exchanges, include any required MEMO in the sender's vendor field.
         </span>
       </div>
+      -->
     </div>
 
     <BottomDock />
