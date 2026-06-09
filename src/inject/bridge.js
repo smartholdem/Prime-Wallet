@@ -28,46 +28,82 @@
     const data = event.data;
     if (!data || data.source !== "smartholdem-dapp") return;
 
-    chrome.runtime.sendMessage(
-      {
-        type: "smartholdem:request",
-        payload: {
+    // Fast-fail: if the extension context is gone (extension was reloaded,
+    // disabled, the SW was torn down between page load and now, or the
+    // page was opened before the extension was installed) `chrome.runtime`
+    // is still technically a non-undefined object, but `.id` is `undefined`
+    // and `sendMessage` throws synchronously with
+    // "Error: Extension context invalidated." Detecting it up-front lets
+    // us reject the dApp's Promise immediately instead of letting it hang
+    // on inject.js's 60s timeout.
+    if (!chrome.runtime?.id) {
+      window.postMessage(
+        {
+          source: "smartholdem-wallet",
           id: data.id,
-          method: data.method,
-          params: data.params,
-          origin: window.location.origin,
+          error: "smartholdem: extension context invalidated",
         },
-      },
-      (response) => {
-        // Background returned `true` ⇒ this callback fires once the side
-        // panel resolves or rejects the request (or the 120 s timeout
-        // expires). `response` is shaped `{ id, result, error }`.
-        if (chrome.runtime.lastError) {
-          // The service worker was suspended or the channel was closed
-          // before the user acted — surface that to the dApp as an error.
+        "*",
+      );
+      return;
+    }
+
+    try {
+      chrome.runtime.sendMessage(
+        {
+          type: "smartholdem:request",
+          payload: {
+            id: data.id,
+            method: data.method,
+            params: data.params,
+            origin: window.location.origin,
+          },
+        },
+        (response) => {
+          // Background returned `true` ⇒ this callback fires once the side
+          // panel resolves or rejects the request (or the 120 s timeout
+          // expires). `response` is shaped `{ id, result, error }`.
+          if (chrome.runtime.lastError) {
+            // The service worker was suspended or the channel was closed
+            // before the user acted — surface that to the dApp as an error.
+            window.postMessage(
+              {
+                source: "smartholdem-wallet",
+                id: data.id,
+                error:
+                  chrome.runtime.lastError.message ||
+                  "smartholdem: channel closed before user action",
+              },
+              "*",
+            );
+            return;
+          }
+          if (!response || response.id !== data.id) return;
           window.postMessage(
             {
               source: "smartholdem-wallet",
               id: data.id,
-              error:
-                chrome.runtime.lastError.message ||
-                "smartholdem: channel closed before user action",
+              result: response.result,
+              error: response.error,
             },
             "*",
           );
-          return;
-        }
-        if (!response || response.id !== data.id) return;
-        window.postMessage(
-          {
-            source: "smartholdem-wallet",
-            id: data.id,
-            result: response.result,
-            error: response.error,
-          },
-          "*",
-        );
-      },
-    );
+        },
+      );
+    } catch (e) {
+      // The context can be invalidated *during* the call too — e.g. the SW
+      // dies between our `chrome.runtime?.id` check above and the actual
+      // `sendMessage` invocation. Same root cause, same user-facing error.
+      window.postMessage(
+        {
+          source: "smartholdem-wallet",
+          id: data.id,
+          error:
+            "smartholdem: " +
+            (e?.message || "sendMessage failed (context invalidated)"),
+        },
+        "*",
+      );
+    }
   });
 })();

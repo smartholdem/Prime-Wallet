@@ -62,6 +62,12 @@ export const useWalletStore = defineStore("walletStorage", {
     // Per-account on-chain state, keyed by address.
     balances: {} as Record<string, number>,
     nonces: {} as Record<string, string>,
+    // Number of broadcast txs per address that the chain has not yet confirmed.
+    // SmartHoldem block time is 8s — during that window the node still returns
+    // the pre-broadcast nonce, so we have to track pending txs ourselves to
+    // compute the correct next nonce for follow-up sends. Reset by the
+    // background re-sync scheduled in sendTransfer().
+    inflightTxs: {} as Record<string, number>,
     publicKeys: {} as Record<string, string>,
     // Per-address transaction history cache. Switching accounts is instant
     // because we hand back the cached list while a background fetch refreshes.
@@ -156,11 +162,19 @@ export const useWalletStore = defineStore("walletStorage", {
         const d = res.status === 404 ? null : res.data?.data;
         if (d) {
           this.balances[address] = parseFloat(((d.balance ?? 0) / 1e8).toFixed(8));
-          this.nonces[address] = d.nonce ?? "0";
+          // Nonce handling: if we have in-flight (unconfirmed) broadcasts
+          // the node still returns the pre-broadcast nonce. Add the
+          // optimistic offset on top so the next send picks the right
+          // nonce without forcing the user to mash the Refresh button.
+          const chainNonce = d.nonce ?? "0";
+          const inflight = this.inflightTxs[address] ?? 0;
+          this.nonces[address] = (
+            BigInt(chainNonce) + BigInt(inflight)
+          ).toString();
           this.publicKeys[address] = d.publicKey ?? "";
         } else {
           this.balances[address] = 0;
-          this.nonces[address] = "0";
+          if ((this.inflightTxs[address] ?? 0) === 0) this.nonces[address] = "0";
         }
         this.lastSyncedAt = Date.now();
       } catch {
@@ -265,6 +279,29 @@ export const useWalletStore = defineStore("walletStorage", {
         { transactions: [tx] },
         { headers: { "Content-Type": "application/json" }, timeout: 12000 }
       );
+
+      // Broadcast accepted by the relay — the node returns a tx id but the
+      // tx is still in the mempool and won't be reflected by GET /wallets/<addr>
+      // for ~one block (8s on SmartHoldem mainnet). Optimistically bump the
+      // local nonce now so a follow-up send during that 8s window uses the
+      // correct next nonce instead of re-sending the same one (which the node
+      // would reject as a duplicate).
+      this.inflightTxs[address] = (this.inflightTxs[address] ?? 0) + 1;
+      this.nonces[address] = (BigInt(this.nonces[address] || "0") + 1n).toString();
+
+      // Background re-sync: once the chain has had a full block to confirm
+      // (8s) plus a small RPC-latency margin, reconcile our optimistic offset
+      // with on-chain reality. Decrementing the inflight counter here lets
+      // fetchBalance() trust the chain value again from this point on.
+      // 9000ms = one block + 1s slack.
+      setTimeout(() => {
+        if ((this.inflightTxs[address] ?? 0) > 0) {
+          this.inflightTxs[address] -= 1;
+        }
+        this.fetchBalance(address).catch(() => {});
+        this.fetchTransactions(address, 8).catch(() => {});
+      }, 9000);
+
       return { tx, response: res.data?.data ?? res.data };
     },
 
@@ -436,6 +473,23 @@ export const useWalletStore = defineStore("walletStorage", {
       // compatible values; a Buffer becomes `{}` and silently corrupts the
       // signature on the dApp side).
       const cleanTx = JSON.parse(JSON.stringify(tx));
+
+      // Reserve the nonce the same way sendTransfer() does — a dApp is
+      // expected to broadcast the signed payload moments later, and the
+      // chain will not reflect it for ~8s. Without this bump, a second
+      // signTransaction() call in the same dApp session would hand back
+      // the same nonce and the node would reject the second broadcast as
+      // a duplicate. Background re-sync is identical to the broadcast path.
+      this.inflightTxs[address] = (this.inflightTxs[address] ?? 0) + 1;
+      this.nonces[address] = (BigInt(this.nonces[address] || "0") + 1n).toString();
+      setTimeout(() => {
+        if ((this.inflightTxs[address] ?? 0) > 0) {
+          this.inflightTxs[address] -= 1;
+        }
+        this.fetchBalance(address).catch(() => {});
+        this.fetchTransactions(address, 8).catch(() => {});
+      }, 9000);
+
       return {
         tx: cleanTx,
         id: cleanTx.id,
