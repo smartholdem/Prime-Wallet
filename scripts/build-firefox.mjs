@@ -15,7 +15,7 @@
  *        - Inject `sidebar_action.default_panel = "popup.html"`.
  *        - Add `browser_specific_settings.gecko.{id, strict_min_version}`.
  *   4. Zip `dist-firefox/` contents (no parent folder) into
- *      `apps/extension/prime-wallet-firefox-<version>.zip`.
+ *      `apps/extension/smartholdem-wallet-firefox-<version>.zip`.
  *   5. Print final artefact path, size, sha256, and version.
  *
  * The Chromium `apps/extension/dist/` and `.crx` artefacts are NEVER touched
@@ -58,7 +58,7 @@ const OUT_DIR = resolve(ROOT, "apps/extension/dist-firefox");
 const SRC_MANIFEST = resolve(ROOT, "manifest.json");
 const ZIP_PATH = resolve(
   ROOT,
-  `apps/extension/prime-wallet-firefox-${VERSION}.zip`,
+  `apps/extension/smartholdem-wallet-firefox-${VERSION}.zip`,
 );
 
 // ── 1. Vite build into dist-firefox ────────────────────────────────────────
@@ -166,7 +166,7 @@ manifest.permissions = (manifest.permissions || []).filter(
 //     in-app `sidebar=true/false` toggle (impossible at runtime —
 //     manifest surfaces are decided at install time).
 manifest.action = {
-  default_title: "Prime Wallet",
+  default_title: "SmartHoldem Wallet",
   default_popup: "popup.html",
   default_icon: {
     16: "icons/icon-16.png",
@@ -175,7 +175,7 @@ manifest.action = {
   },
 };
 manifest.sidebar_action = {
-  default_title: "Prime Wallet",
+  default_title: "SmartHoldem Wallet",
   default_panel: "popup.html",
   default_icon: {
     16: "icons/icon-16.png",
@@ -190,7 +190,7 @@ manifest.sidebar_action = {
 //     listing key, so it must remain stable across releases.
 manifest.browser_specific_settings = {
   gecko: {
-    id: "primewallet@smartholdem.io",
+    id: "wallet@smartholdem.io",
     strict_min_version: "142.0",
     "data_collection_permissions": {
       "required": [

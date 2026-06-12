@@ -1,4 +1,4 @@
-# SmartHoldem Wallet - Prime Edition
+# SmartHoldem Wallet Core Edition
 
 > **An industrial-grade crypto wallet for SmartHoldem (STH)** powered by Chrome MV3 Side Panel.
 > Vite + Vue 3 + Pinia + Tailwind. Core logic is strictly ported from the official [wallet-pro](https://github.com/smartholdem/wallet-pro).
@@ -37,7 +37,7 @@
 * High-contrast QR-code generator styled with signature cyan corner markers and JetBrains Mono address strings.
 * Tap-to-Copy interaction with an instant "Address Secured" toast alert.
 
-### 1.5. Swap Hub (Exchange · Prime)
+### 1.5. Swap Hub (Exchange)
 
 * Dual-tabbed layout (**Buy STH / Sell STH**) matching the production `ExchangeModal.vue` logic from wallet-pro.
 * **Buy STH:**
@@ -616,10 +616,10 @@ End-to-end integration verification with a fully active, real-world native injec
 
 ---
 
-## 4. Architectural Invariants: Why Prime Leads the SmartHoldem Ecosystem
+## 4. Architectural Invariants: Why Core Leads the SmartHoldem Ecosystem
 
 1. **Industrial-Grade Brutalist Design Aesthetics:** Rejects generic interface templates. Custom layout engineering built completely around specialized color variables: Gunmetal #121315, Rust Orange #E25822, Volt Cyan #06B6D4, and JetBrains Mono fonts optimizing tabular numeric data arrays and address string presentations. Real-time layout skinning updates instantly via clean root CSS variable injection schemes.
-2. **Side Panel Native Architecture Strategy:** Unlike typical browser popups that flush internal states and drop sessions when losing target focus or changing browser tabs, Prime lives inside a native persistent sidebar container. This structure preserves transactional context across intense web-poker tournaments and complex dApp sessions.
+2. **Side Panel Native Architecture Strategy:** Unlike typical browser popups that flush internal states and drop sessions when losing target focus or changing browser tabs, Core Wallet lives inside a native persistent sidebar container. This structure preserves transactional context across intense web-poker tournaments and complex dApp sessions.
 3. **Perfect Operational parity with wallet-pro:** Integrates identical cryptographic functions, matching transmission payload formats, and shared swap gate logic profiles. Move profiles across runtime applications with zero address mismatch risks.
 4. **Hierarchical Deterministic (HD) Multi-Accounts & Custom Tagging:** Derive infinite distinct address keys from a single master backup seed. Organize allocations using distinct local aliases like "Poker Bankroll", "Cold Storage", or "Daily Spend" - fully preserved inside your encrypted backup archives.
 5. **Native Embedded Bridge Swap Functionality:** Avoid shifting between separate browser portals to handle exchange transactions. Execute automated Buy/Sell operations directly using unique per-account BEP20 deposit endpoints, automated slippage protections, and automated verification confirmation polling hooks.
@@ -662,7 +662,7 @@ End-to-end integration verification with a fully active, real-world native injec
 - Commandline: PowerShell or Linux terminal
 
 ### Step-by-Step Instructions to Reproduce the Build:
-1. Clone the repository https://github.com/smartholdem/Prime-Wallet or extract the provided source code archive.
+1. Clone the repository https://github.com/smartholdem/Core-Wallet or extract the provided source code archive.
 2. Ensure you are using Node.js (LTS version recommended).
 3. Run `yarn install` to install the exact vendor dependencies, including core cryptographic modules (secp256k1, bip39).
 4. Run the production build command: `yarn build:firefox`.
@@ -683,7 +683,7 @@ If you encounter a Vite caching or HTML proxy compilation error during the build
 
 **Authors**: TechnoL0g & SmartHoldem Foundation.
 
-PRIME Wallet is open-source software. This project includes and bundles the following open-source fonts embedded locally for offline execution, performance, and user privacy:
+SmartHoldem Wallet is open-source software. This project includes and bundles the following open-source fonts embedded locally for offline execution, performance, and user privacy:
 
 * **Inter Font Family**
     * **Author:** Rasmus Andersson Suite
