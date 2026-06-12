@@ -655,6 +655,27 @@ End-to-end integration verification with a fully active, real-world native injec
 
 ---
 
+### Build Architecture:
+- Framework: Vue 3
+- Bundler: Vite / Rollup
+- Environment: Node.js (v22/v24+)
+
+### Step-by-Step Instructions to Reproduce the Build:
+1. Clone the repository https://github.com/smartholdem/Prime-Wallet or extract the provided source code archive.
+2. Ensure you are using Node.js (LTS version recommended).
+3. Run `yarn install` to install the exact vendor dependencies, including core cryptographic modules (secp256k1, bip39).
+4. Run the production build command: `yarn build:firefox`.
+5. The compiled extension assets and production manifest file will be generated locally in the output directory (`/dist` and`/app`).
+
+### Troubleshooting & Build:
+If you encounter a Vite caching or HTML proxy compilation error during the build process (such as `[vite:html-inline-proxy] No matching HTML proxy module found`), please apply the following standard Vite resolution steps:
+1. Completely clear the local dependency and optimizer cache by running: `rm -rf node_modules/.vite` (or delete the `.vite` folder inside `node_modules`).
+2. Clean any residual build artifacts: `rm -rf dist build`
+3. Re-run the clean installation and build cycle: `yarn install && yarn build` (or `npm install && npm run build`).
+   This resolves any stale dependency cache conflicts between environment setups.
+
+---
+
 ## 📄 Licenses & Third-Party Notices
 
 **Licence**: MIT - feel free to fork.
