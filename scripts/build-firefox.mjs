@@ -190,7 +190,7 @@ manifest.sidebar_action = {
 //     listing key, so it must remain stable across releases.
 manifest.browser_specific_settings = {
   gecko: {
-    id: "prime-wallet@smartholdem.io",
+    id: "primewallet@smartholdem.io",
     strict_min_version: "142.0",
     "data_collection_permissions": {
       "required": [
